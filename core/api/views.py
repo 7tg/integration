@@ -1,9 +1,9 @@
-from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError, PermissionDenied
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK
+from rest_framework.viewsets import ModelViewSet
 
 from core.api.serializers import OrganizationSerializer, \
     OrganizationUserSerializer, TransactionSerializer, \
@@ -18,6 +18,8 @@ class OrganizationViewSet(ModelViewSet):
     queryset = Organization.objects.all()
     serializer_class = OrganizationSerializer
     permission_classes = [IsAdminOrReadOnly, ]
+    filterset_fields = ('name', 'users',)
+
 
     def get_queryset(self):
         if not self.request.user.is_superuser:
@@ -52,6 +54,7 @@ class TransactionViewSet(ModelViewSet):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
     permission_classes = [IsAdminOrReadOnly, ]
+    filterset_fields = ('user', 'amount', 'status', 'type')
 
     def get_queryset(self):
         if not self.request.user.is_superuser:
