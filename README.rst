@@ -54,26 +54,47 @@ Docker
 ^^^^^^
 
 You will need to build the stack first. To do that, run:
+
 .. code-block:: bash
+
     docker-compose -f local.yml build
+
 Once this is ready, you can run it with:
+
 .. code-block:: bash
+
     docker-compose -f local.yml up
+
 To run the stack and detach the containers, run:
+
 .. code-block:: bash
+
     docker-compose -f local.yml up -d
+
 To run a migration, open up a second terminal and run:
+
 .. code-block:: bash
+
     docker-compose -f local.yml run --rm django python manage.py migrate
+
 To create a superuser, run:
+
 .. code-block:: bash
+
     docker-compose -f local.yml run --rm django python manage.py createsuperuser
+
 If you need a shell, run:
+
 .. code-block:: bash
+
     docker-compose -f local.yml run --rm django python manage.py shell
+
 To check the logs out, run:
+
 .. code-block:: bash
+
     docker-compose -f local.yml logs
+
 
 See detailed `cookiecutter-django Docker documentation`_.
 
