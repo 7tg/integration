@@ -1,6 +1,8 @@
 from django.contrib import admin
+from import_export.admin import ExportActionModelAdmin
 
-from core.models import Organization
+from core.models import Organization, Transaction
+from core.resources import TransactionResource
 from integration.users.models import User
 
 
@@ -17,3 +19,16 @@ class OrganizationAdmin(admin.ModelAdmin):
     )
     search_fields = ('name',)
 
+
+@admin.register(Transaction)
+class TransactionAdmin(ExportActionModelAdmin):
+    resource_class = TransactionResource
+    list_display = (
+        'id',
+        'user',
+        'amount',
+        'type',
+        'status',
+    )
+    search_fields = ('user',)
+    list_filter = ('status', 'type')

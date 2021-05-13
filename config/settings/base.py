@@ -72,6 +72,7 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "corsheaders",
+    "import_export",
 ]
 
 LOCAL_APPS = [
@@ -307,3 +308,6 @@ REST_FRAMEWORK = {
 CORS_URLS_REGEX = r"^/api/.*$"
 # Your stuff...
 # ------------------------------------------------------------------------------
+ATOMIC_REQUESTS = True  # We are doing business with money, there is no room
+# for errors
+IMPORT_EXPORT_USE_TRANSACTIONS = True
