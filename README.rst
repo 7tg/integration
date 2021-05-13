@@ -31,38 +31,6 @@ Setting Up Your Users
 
 For convenience, you can keep your normal user logged in on Chrome and your superuser logged in on Firefox (or similar), so that you can see how the site behaves for both kinds of users.
 
-Type checks
-^^^^^^^^^^^
-
-Running type checks with mypy:
-
-::
-
-  $ mypy integration
-
-Test coverage
-^^^^^^^^^^^^^
-
-To run the tests, check your test coverage, and generate an HTML coverage report::
-
-    $ coverage run -m pytest
-    $ coverage html
-    $ open htmlcov/index.html
-
-Running tests with py.test
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-::
-
-  $ pytest
-
-Live reloading and Sass CSS compilation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Moved to `Live reloading and SASS compilation`_.
-
-.. _`Live reloading and SASS compilation`: http://cookiecutter-django.readthedocs.io/en/latest/live-reloading-and-sass-compilation.html
-
 Celery
 ^^^^^^
 
@@ -82,15 +50,30 @@ Deployment
 
 The following details how to deploy this application.
 
-Heroku
-^^^^^^
-
-See detailed `cookiecutter-django Heroku documentation`_.
-
-.. _`cookiecutter-django Heroku documentation`: http://cookiecutter-django.readthedocs.io/en/latest/deployment-on-heroku.html
-
 Docker
 ^^^^^^
+
+You will need to build the stack first. To do that, run:
+.. code-block:: bash
+    docker-compose -f local.yml build
+Once this is ready, you can run it with:
+.. code-block:: bash
+    docker-compose -f local.yml up
+To run the stack and detach the containers, run:
+.. code-block:: bash
+    docker-compose -f local.yml up -d
+To run a migration, open up a second terminal and run:
+.. code-block:: bash
+    docker-compose -f local.yml run --rm django python manage.py migrate
+To create a superuser, run:
+.. code-block:: bash
+    docker-compose -f local.yml run --rm django python manage.py createsuperuser
+If you need a shell, run:
+.. code-block:: bash
+    docker-compose -f local.yml run --rm django python manage.py shell
+To check the logs out, run:
+.. code-block:: bash
+    docker-compose -f local.yml logs
 
 See detailed `cookiecutter-django Docker documentation`_.
 
